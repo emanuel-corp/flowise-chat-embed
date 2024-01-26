@@ -48,8 +48,8 @@ export const Badge = (props: Props) => {
         'text-align': 'center',
         color: props.poweredByTextColor ?? defaultTextColor,
         'background-color': props.badgeBackgroundColor ?? '#ffffff',
+        height: '30px',
       }}
-    >
-    </span>
+    />
   );
 };
