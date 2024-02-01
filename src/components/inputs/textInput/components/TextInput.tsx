@@ -42,7 +42,6 @@ export const TextInput = (props: Props) => {
     }
   };
 
-
   createEffect(() => {
     if (!props.disabled && !isMobile() && inputRef) inputRef.focus();
   });
