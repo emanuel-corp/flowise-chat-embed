@@ -1,4 +1,4 @@
-import { ShortTextInput } from './ShortTextInput';
+import { TextAreaInput } from './TextAreaInput';
 import { isMobile } from '@/utils/isMobileSignal';
 import { createSignal, createEffect, onMount } from 'solid-js';
 import { SendButton } from '@/components/SendButton';
@@ -31,10 +31,17 @@ export const TextInput = (props: Props) => {
   };
 
   const submitWhenEnter = (e: KeyboardEvent) => {
-    // Check if IME composition is in progress
+    // Check if IME composition is in progress or if the Shift key is pressed
     const isIMEComposition = e.isComposing || e.keyCode === 229;
-    if (e.key === 'Enter' && !isIMEComposition) submit();
+    const isShiftPressed = e.shiftKey;
+
+    // Only submit when Enter is pressed without Shift or IME composition
+    if (e.key === 'Enter' && !isIMEComposition && !isShiftPressed) {
+      e.preventDefault(); // Prevent the default action to handle manually
+      submit();
+    }
   };
+
 
   createEffect(() => {
     if (!props.disabled && !isMobile() && inputRef) inputRef.focus();
@@ -61,8 +68,8 @@ export const TextInput = (props: Props) => {
       }}
       onKeyDown={submitWhenEnter}
     >
-      <ShortTextInput
-        ref={inputRef as HTMLInputElement}
+      <TextAreaInput
+        ref={inputRef as HTMLTextAreaElement}
         onInput={handleInput}
         value={inputValue()}
         fontSize={props.fontSize}
