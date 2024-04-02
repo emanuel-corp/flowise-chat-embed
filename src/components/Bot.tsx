@@ -13,6 +13,7 @@ import socketIOClient from 'socket.io-client';
 import { Popup } from '@/features/popup';
 import { Avatar } from '@/components/avatars/Avatar';
 import { DeleteButton } from '@/components/SendButton';
+import { FullscreenIcon } from '@/components/icons/FullscreenIcon';
 
 type messageType = 'apiMessage' | 'userMessage' | 'usermessagewaiting';
 
@@ -45,6 +46,8 @@ export type BotProps = {
   fontSize?: number;
   isFullPage?: boolean;
   observersConfig?: observersConfigType;
+  showFullScreenToggle?: boolean;
+  toggleFullScreen?: () => void;
 };
 
 const defaultWelcomeMessage = 'Hi there! How can I help?';
@@ -128,7 +131,7 @@ const defaultWelcomeMessage = 'Hi there! How can I help?';
 
 export const Bot = (botProps: BotProps & { class?: string }) => {
   // set a default value for showTitle if not set and merge with other props
-  const props = mergeProps({ showTitle: true }, botProps);
+  const props = mergeProps({ showTitle: true, showFullScreenToggle: false }, botProps);
   let chatContainer: HTMLDivElement | undefined;
   let bottomSpacer: HTMLDivElement | undefined;
   let botContainer: HTMLDivElement | undefined;
@@ -155,20 +158,20 @@ export const Bot = (botProps: BotProps & { class?: string }) => {
     if (botProps?.observersConfig) {
       const { observeUserInput, observeLoading, observeMessages } = botProps.observersConfig;
       typeof observeUserInput === 'function' &&
-        // eslint-disable-next-line solid/reactivity
-        createMemo(() => {
-          observeUserInput(userInput());
-        });
+      // eslint-disable-next-line solid/reactivity
+      createMemo(() => {
+        observeUserInput(userInput());
+      });
       typeof observeLoading === 'function' &&
-        // eslint-disable-next-line solid/reactivity
-        createMemo(() => {
-          observeLoading(loading());
-        });
+      // eslint-disable-next-line solid/reactivity
+      createMemo(() => {
+        observeLoading(loading());
+      });
       typeof observeMessages === 'function' &&
-        // eslint-disable-next-line solid/reactivity
-        createMemo(() => {
-          observeMessages(messages());
-        });
+      // eslint-disable-next-line solid/reactivity
+      createMemo(() => {
+        observeMessages(messages());
+      });
     }
 
     if (!bottomSpacer) return;
@@ -523,6 +526,11 @@ export const Bot = (botProps: BotProps & { class?: string }) => {
               >
                 <span style={{ 'font-family': 'Poppins, sans-serif' }}>Clear</span>
               </DeleteButton>
+              {props.showFullScreenToggle ? (
+                <button onClick={props.toggleFullScreen} class="p-2" title="Toggle Full Screen">
+                  <FullscreenIcon color="#FFF" />
+                </button>
+              ) : null}
             </div>
           ) : null}
           <TextInput

@@ -67,17 +67,6 @@ pre {
   color: rgb(0, 43, 54);
 }
 
-/* Hide scrollbar for Chrome, Safari and Opera */
-.scrollable-container::-webkit-scrollbar {
-  display: none;
-}
-
-/* Hide scrollbar for IE, Edge and Firefox */
-.scrollable-container {
-  -ms-overflow-style: none; /* IE and Edge */
-  scrollbar-width: none; /* Firefox */
-}
-
 .text-fade-in {
   transition: opacity 400ms ease-in 200ms;
 }

@@ -26,6 +26,8 @@ export type BotProps = {
     fontSize?: number;
     isFullPage?: boolean;
     observersConfig?: observersConfigType;
+    showFullScreenToggle?: boolean;
+    toggleFullScreen?: () => void;
 };
 export declare const Bot: (botProps: BotProps & {
     class?: string;

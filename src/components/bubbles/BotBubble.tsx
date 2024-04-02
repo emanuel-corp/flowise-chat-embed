@@ -2,6 +2,7 @@ import { Show, onMount } from 'solid-js';
 import { Avatar } from '../avatars/Avatar';
 import { Marked } from '@ts-stack/markdown';
 import { sendFileDownloadQuery } from '@/queries/sendMessageQuery';
+import CopyToClipboard from '@/components/CopyToClipboard';
 
 type Props = {
   message: string;
@@ -68,16 +69,19 @@ export const BotBubble = (props: Props) => {
       <Show when={props.showAvatar}>
         <Avatar initialAvatarSrc={props.avatarSrc} />
       </Show>
-      <span
-        ref={botMessageEl}
-        class="px-4 py-2 ml-2 max-w-full chatbot-host-bubble prose"
-        data-testid="host-bubble"
-        style={{
-          'background-color': props.backgroundColor ?? defaultBackgroundColor,
-          color: props.textColor ?? defaultTextColor,
-          'border-radius': '6px',
-        }}
-      />
+      <div class="flex flex-col">
+        <span
+          ref={botMessageEl}
+          class="px-4 py-2 ml-2 max-w-full chatbot-host-bubble prose"
+          data-testid="host-bubble"
+          style={{
+            'background-color': props.backgroundColor ?? defaultBackgroundColor,
+            color: props.textColor ?? defaultTextColor,
+            'border-radius': '6px',
+          }}
+        />
+        <CopyToClipboard value={props.message} />
+      </div>
     </div>
   );
 };

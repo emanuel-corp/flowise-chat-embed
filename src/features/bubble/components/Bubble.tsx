@@ -14,6 +14,11 @@ export const Bubble = (props: BubbleProps) => {
 
   const [isBotOpened, setIsBotOpened] = createSignal(false);
   const [isBotStarted, setIsBotStarted] = createSignal(false);
+  const [isFullScreen, setIsFullScreen] = createSignal(false);
+
+  const toggleFullScreen = () => {
+    setIsFullScreen(!isFullScreen());
+  };
 
   const openBot = () => {
     if (!isBotStarted()) setIsBotStarted(true);
@@ -26,6 +31,20 @@ export const Bubble = (props: BubbleProps) => {
 
   const toggleBot = () => {
     isBotOpened() ? closeBot() : openBot();
+  };
+
+  const chatWindowClass = (): string => {
+    let baseClass = 'fixed rounded-lg transition-opacity duration-150 ease-out';
+    baseClass += isBotOpened() ? ' opacity-1' : ' opacity-0 pointer-events-none';
+
+    if (isFullScreen()) {
+      baseClass += ' top-0 left-0 w-screen h-screen';
+    } else {
+      baseClass += ' sm:right-5 w-full sm:w-[600px] max-h-[704px]';
+      baseClass += props.theme?.button?.size === 'large' ? ' bottom-24' : ' bottom-20';
+    }
+
+    return baseClass;
   };
 
   return (
@@ -43,11 +62,7 @@ export const Bubble = (props: BubbleProps) => {
           'background-color': bubbleProps.theme?.chatWindow?.backgroundColor || '#ffffff',
           'z-index': 42424242,
         }}
-        class={
-          `fixed sm:right-5 rounded-lg w-full sm:w-[400px] max-h-[704px]` +
-          (isBotOpened() ? ' opacity-1' : ' opacity-0 pointer-events-none') +
-          (props.theme?.button?.size === 'large' ? ' bottom-24' : ' bottom-20')
-        }
+        class={chatWindowClass()}
       >
         <Show when={isBotStarted()}>
           <Bot
@@ -67,6 +82,8 @@ export const Bubble = (props: BubbleProps) => {
             chatflowConfig={props.chatflowConfig}
             apiHost={props.apiHost}
             observersConfig={props.observersConfig}
+            toggleFullScreen={toggleFullScreen}
+            showFullScreenToggle={true}
           />
         </Show>
       </div>
