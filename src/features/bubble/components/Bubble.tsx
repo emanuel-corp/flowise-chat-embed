@@ -38,7 +38,7 @@ export const Bubble = (props: BubbleProps) => {
     baseClass += isBotOpened() ? ' opacity-1' : ' opacity-0 pointer-events-none';
 
     if (isFullScreen()) {
-      baseClass += ' top-0 left-0 w-screen h-screen';
+      baseClass += ' top-[20px] left-[20px] w-[98%]';
     } else {
       baseClass += ' sm:right-5 w-full sm:w-[600px] max-h-[704px]';
       baseClass += props.theme?.button?.size === 'large' ? ' bottom-24' : ' bottom-20';

@@ -1,1 +1,1 @@
-{"version":3,"file":"CopyToClipboard.d.ts","sourceRoot":"","sources":["../../src/components/CopyToClipboard.tsx"],"names":[],"mappings":"AAEA,KAAK,oBAAoB,GAAG;IAC1B,KAAK,EAAE,MAAM,CAAC;CACf,CAAC;AAEF,eAAO,MAAM,eAAe,UAAW,oBAAoB,mCA4B1D,CAAC;AAEF,eAAe,eAAe,CAAC"}
+{"version":3,"file":"CopyToClipboard.d.ts","sourceRoot":"","sources":["../../src/components/CopyToClipboard.tsx"],"names":[],"mappings":"AAEA,KAAK,oBAAoB,GAAG;IAC1B,KAAK,EAAE,MAAM,CAAC;CACf,CAAC;AAEF,eAAO,MAAM,eAAe,UAAW,oBAAoB,mCAgC1D,CAAC;AAEF,eAAe,eAAe,CAAC"}
