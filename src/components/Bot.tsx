@@ -158,20 +158,20 @@ export const Bot = (botProps: BotProps & { class?: string }) => {
     if (botProps?.observersConfig) {
       const { observeUserInput, observeLoading, observeMessages } = botProps.observersConfig;
       typeof observeUserInput === 'function' &&
-      // eslint-disable-next-line solid/reactivity
-      createMemo(() => {
-        observeUserInput(userInput());
-      });
+        // eslint-disable-next-line solid/reactivity
+        createMemo(() => {
+          observeUserInput(userInput());
+        });
       typeof observeLoading === 'function' &&
-      // eslint-disable-next-line solid/reactivity
-      createMemo(() => {
-        observeLoading(loading());
-      });
+        // eslint-disable-next-line solid/reactivity
+        createMemo(() => {
+          observeLoading(loading());
+        });
       typeof observeMessages === 'function' &&
-      // eslint-disable-next-line solid/reactivity
-      createMemo(() => {
-        observeMessages(messages());
-      });
+        // eslint-disable-next-line solid/reactivity
+        createMemo(() => {
+          observeMessages(messages());
+        });
     }
 
     if (!bottomSpacer) return;
